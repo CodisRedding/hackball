@@ -1,0 +1,25 @@
+{
+  "name": "hackball",
+  "version": "1.0.0",
+  "description": "Baseball for assholes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:fourq/hackball.git"
+  },
+  "keywords": [
+    "hacknashville"
+  ],
+  "author": "fourq",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fourq/hackball/issues"
+  },
+  "homepage": "https://github.com/fourq/hackball",
+  "dependencies": {
+    "minimist": "^1.1.0"
+  }
+}
