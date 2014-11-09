@@ -9,7 +9,7 @@ gh.auth(config.github_user, config.github_pass);
 
 /* Poll for open issues */
 new CronJob('*/5 * * * * *', function () {
-	console.log('polling...');
+	console.log('waiting for play...');
 	gh.getOpenIssues(config.github_repo, function (err, issues) {
 		if (err) {
 			console.log(err);
