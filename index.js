@@ -15,6 +15,11 @@ new CronJob('*/5 * * * * *', function () {
 			console.log(err);
 			return;
 		}
+
+		console.log('issue count: ' + issues.length);
+		for (var issue = 0; issue < issues.length; issue++) {
+			console.log('issue #' + issues[issue].number);
+		}
 	});
 }, null, true, 'America/Chicago');
 
