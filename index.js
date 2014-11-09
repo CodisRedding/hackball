@@ -3,27 +3,44 @@
 var CronJob = require('cron').CronJob;
 var Github = require('./lib/github');
 var config = require('./config.json');
+var BaseballGame = require('./lib/game');
+var Team = require('./lib/team');
+var Player = require('./lib/player');
 
+/* Setup players */
+var playersHome = [];
+var playersAway = [];
+for(var pos = 0; pos < BaseballGame.POSITIONS.length; pos++) {
+	playersHome.push(new Player('Player' + pos, BaseballGame.POSITIONS[pos]));
+	playersAway.push(new Player('Player' + pos, BaseballGame.POSITIONS[pos]));
+}
+
+/* Setup teams */
+var teamAway = new Team('Lights', playersAway);
+var teamHome = new Team('Sounds', playersHome);
+
+/* Setup game */
+var game = new BaseballGame(teamHome, teamAway);
+
+game.start(teamHome);
+game.toString();
+
+/* Poll for open issues */
 var gh = new Github();
 gh.auth(config.github_user, config.github_pass);
 
-/* Poll for open issues */
 new CronJob('*/5 * * * * *', function () {
-	console.log('waiting for play...');
+	//console.log('DEBUG> waiting for play...');
 	gh.getOpenIssues(config.github_repo, function (err, issues) {
 		if (err) {
 			console.log(err);
 			return;
 		}
 
-		console.log('issue count: ' + issues.length);
+		//console.log('DEBUG> issue count: ' + issues.length);
 		for (var issue = 0; issue < issues.length; issue++) {
-			console.log('issue #' + issues[issue].number);
+			//console.log('DEBUG> issue #' + issues[issue].number);
+			game.makePlay();
 		}
 	});
 }, null, true, 'America/Chicago');
-
-/*
-var argv = require('minimist')(process.argv.slice(2));
-console.dir(argv);
-*/
