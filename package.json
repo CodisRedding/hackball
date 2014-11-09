@@ -20,6 +20,9 @@
   },
   "homepage": "https://github.com/fourq/hackball",
   "dependencies": {
-    "minimist": "^1.1.0"
+    "cron": "^1.0.5",
+    "github": "^0.2.2",
+    "minimist": "^1.1.0",
+    "time": "^0.11.0"
   }
 }
